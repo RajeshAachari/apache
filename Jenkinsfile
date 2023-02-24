@@ -49,8 +49,19 @@ pipeline {
     }
 
     stage('PRODUCTION') {
-      steps {
-        sh 'echo "stage of production control"'
+      parallel {
+        stage('PRODUCTION') {
+          steps {
+            sh 'echo "stage of production control"'
+          }
+        }
+
+        stage('jenkins') {
+          steps {
+            sh 'echo "stage of jenkins"'
+          }
+        }
+
       }
     }
 
